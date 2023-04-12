@@ -5,6 +5,7 @@ import axios from "axios";
 import Recipes from "./components/recipes";
 import Add from "./components/add";
 // import Edit from "./components/edit";
+import NotFound from "./components/404";
 
 function App() {
   const [recipes, setRecipes] = useState([]);
@@ -26,10 +27,12 @@ function App() {
   };
 
   const handleCreate = (addRecipe) => {
-    axios.post("http://localhost:8000/api/recipes", addRecipe).then((response) => {
-      console.log(response);
-      getRecipes();
-    });
+    axios
+      .post("http://localhost:8000/api/recipes", addRecipe)
+      .then((response) => {
+        console.log(response);
+        getRecipes();
+      });
   };
 
   const handleUpdate = (editRecipe) => {
@@ -50,8 +53,8 @@ function App() {
   };
 
   useEffect(() => {
-    getRecipes()
-    getUsers()
+    getRecipes();
+    getUsers();
   }, []);
 
   return (
@@ -65,6 +68,7 @@ function App() {
         path="/edit/:id"
         element={<Edit recipes={recipes} handleEdit={handleEdit} />}
       /> */}
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 }
