@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import axios from "axios";
 import Recipes from "./components/recipes";
 import Add from "./components/add";
-// import Edit from "./components/edit";
+import Edit from "./components/edit";
 import NotFound from "./components/404";
 
 function App() {
@@ -45,11 +45,9 @@ function App() {
   };
 
   const handleDelete = (e) => {
-    axios
-      .delete("http://localhost:8000/api/recipes/" + e.target.value)
-      .then((response) => {
-        getRecipes();
-      });
+    axios.delete("http://localhost:8000/api/recipes/" + e).then((response) => {
+      getRecipes();
+    });
   };
 
   useEffect(() => {
@@ -64,10 +62,7 @@ function App() {
         element={<Recipes recipes={recipes} handleDelete={handleDelete} />}
       />
       <Route path="/add" element={<Add handleCreate={handleCreate} />} />
-      {/* <Route
-        path="/edit/:id"
-        element={<Edit recipes={recipes} handleEdit={handleEdit} />}
-      /> */}
+      <Route path="/:id" element={<Edit handleUpdate={handleUpdate} />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );
