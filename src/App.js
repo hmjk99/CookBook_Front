@@ -44,10 +44,12 @@ function App() {
       });
   };
 
-  const handleDelete = (e) => {
-    axios.delete("http://localhost:8000/api/recipes/" + e).then((response) => {
-      getRecipes();
-    });
+  const handleDelete = (deletedRecipe) => {
+    axios
+      .delete("http://localhost:8000/api/recipes/" + deletedRecipe._id)
+      .then((response) => {
+        getRecipes();
+      });
   };
 
   useEffect(() => {

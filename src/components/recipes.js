@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import Form from "react-router-dom";
 
 const Recipes = (props) => {
   return (
@@ -20,15 +19,9 @@ const Recipes = (props) => {
               <Link to={`/${recipe.id}`} element={(recipe = { recipe })}>
                 <button>Make it Better!</button>
               </Link>
-              <Form
-                method="post"
-                action="destroy"
-                onSubmit={(event) => {
-                  event.preventDefault();
-                }}
-              >
-                <button type="submit">This is Rubbish!</button>
-              </Form>
+              <button onClick={() => props.handleDelete(recipe)}>
+                This is Rubbish!
+              </button>
             </div>
           );
         })}
