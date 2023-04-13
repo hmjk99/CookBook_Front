@@ -19,21 +19,30 @@ const Add = (props) => {
     setRecipes({ ...recipes, [event.target.name]: event.target.value });
   };
 
-  
+
   const handleImageChange = (event) => {
     const image = event.target.files[0];
     setRecipes({ ...recipes, image });
     const reader = new FileReader();
     reader.onload = () => {
-      document.getElementById("image-preview").src = reader.result;
+      document.getElementById('image-preview').src = reader.result;
     };
     reader.readAsDataURL(image);
   };
 
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    props.handleCreate(recipes);
-    navigate("/");
+    const formData = new FormData();
+    formData.append("title", recipes.title);
+    formData.append("image", recipes.image);
+    formData.append("instructions", recipes.instructions);
+    formData.append("equipment", recipes.equipment);
+    formData.append("ingredients", recipes.ingredients);
+
+    props.handleCreate(formData)
+    navigate('/')
+
   };
 
   return (
