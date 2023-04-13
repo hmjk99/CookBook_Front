@@ -16,16 +16,16 @@ const Add = (props) => {
     setRecipes({ ...recipes, [event.target.name]: event.target.value });
   };
 
-  
-  const handleImageChange = (event) => {
-    const image = event.target.files[0];
-    setRecipes({ ...recipes, image });
-    const reader = new FileReader();
-    reader.onload = () => {
-      document.getElementById("image-preview").src = reader.result;
-    };
-    reader.readAsDataURL(image);
-  };
+
+  // const handleImageChange = (event) => {
+  //   const image = event.target.files[0];
+  //   setRecipes({ ...recipes, image });
+  //   const reader = new FileReader();
+  //   reader.onload = () => {
+  //     document.getElementById("image-preview").src = reader.result;
+  //   };
+  //   reader.readAsDataURL(image);
+  // };
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -46,7 +46,7 @@ const Add = (props) => {
         />
         <br />
         <br />
-        <label htmlFor="image">image: </label>
+        {/* <label htmlFor="image">image: </label>
         <input
           type="file"
           id="image"
@@ -59,7 +59,7 @@ const Add = (props) => {
           src={recipes.image}
           alt="Image preview"
           style={{ maxWidth: "100%" }}
-        />
+        /> */}
         <br />
         <br />
         <label htmlFor="instructions">Instructions: </label>

@@ -41,9 +41,9 @@ function App() {
       });
   };
 
-  const handleDelete = (e) => {
+  const handleDelete = (deletedRecipes) => {
     axios
-      .delete("http://localhost:8000/api/recipes/" + e.target.value)
+      .delete("http://localhost:8000/api/recipes/" + deletedRecipes.target.value)
       .then((response) => {
         getRecipes();
       });
