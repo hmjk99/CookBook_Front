@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from 'axios'
 
 const Add = (props) => {
   const [recipes, setRecipes] = useState({
@@ -17,20 +18,29 @@ const Add = (props) => {
   };
 
 
-  // const handleImageChange = (event) => {
-  //   const image = event.target.files[0];
-  //   setRecipes({ ...recipes, image });
-  //   const reader = new FileReader();
-  //   reader.onload = () => {
-  //     document.getElementById("image-preview").src = reader.result;
-  //   };
-  //   reader.readAsDataURL(image);
-  // };
+  const handleImageChange = (event) => {
+    const image = event.target.files[0];
+    setRecipes({ ...recipes, image });
+    const reader = new FileReader();
+    reader.onload = () => {
+      document.getElementById('image-preview').src = reader.result;
+    };
+    reader.readAsDataURL(image);
+  };
+
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    props.handleCreate(recipes);
-    navigate("/");
+    const formData = new FormData();
+    formData.append("title", recipes.title);
+    formData.append("image", recipes.image);
+    formData.append("instructions", recipes.instructions);
+    formData.append("equipment", recipes.equipment);
+    formData.append("ingredients", recipes.ingredients);
+
+    props.handleCreate(formData)
+    navigate('/')
+
   };
 
   return (
@@ -46,7 +56,7 @@ const Add = (props) => {
         />
         <br />
         <br />
-        {/* <label htmlFor="image">image: </label>
+        <label htmlFor="image">image: </label>
         <input
           type="file"
           id="image"
@@ -59,7 +69,7 @@ const Add = (props) => {
           src={recipes.image}
           alt="Image preview"
           style={{ maxWidth: "100%" }}
-        /> */}
+        />
         <br />
         <br />
         <label htmlFor="instructions">Instructions: </label>
