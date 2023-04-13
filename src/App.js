@@ -69,7 +69,7 @@ function App() {
         element={<Recipes recipes={recipes} handleDelete={handleDelete} />}
       />
       <Route path="/add" element={<Add handleCreate={handleCreate} />} />
-      <Route path="/:id" element={<Edit recipes={recipes} />} />
+      <Route path="/:id" element={<Edit />} />
     </Routes>
   );
 }

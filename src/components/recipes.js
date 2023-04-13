@@ -16,7 +16,7 @@ const Recipes = (props) => {
               <h4>Equipment: {recipe.equipment}</h4>
               <h4>Ingredients: {recipe.ingredients}</h4>
               <h4>Instructions: {recipe.instructions}</h4>
-              <Link to={`/${recipe.id}`} element={(recipe = { recipe })}>
+              <Link to={`/${recipe.id}`}>
                 <button>Make it Better!</button>
               </Link>
               <button onClick={props.handleDelete} value={recipe.id}>

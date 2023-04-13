@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from 'axios'
+import axios from "axios";
 
 const Add = (props) => {
   const [recipes, setRecipes] = useState({
@@ -17,17 +17,15 @@ const Add = (props) => {
     setRecipes({ ...recipes, [event.target.name]: event.target.value });
   };
 
-
   const handleImageChange = (event) => {
     const image = event.target.files[0];
     setRecipes({ ...recipes, image });
     const reader = new FileReader();
     reader.onload = () => {
-      document.getElementById('image-preview').src = reader.result;
+      document.getElementById("image-preview").src = reader.result;
     };
     reader.readAsDataURL(image);
   };
-
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -38,9 +36,8 @@ const Add = (props) => {
     formData.append("equipment", recipes.equipment);
     formData.append("ingredients", recipes.ingredients);
 
-    props.handleCreate(formData)
-    navigate('/')
-
+    props.handleCreate(formData);
+    navigate("/");
   };
 
   return (
@@ -73,7 +70,7 @@ const Add = (props) => {
         <br />
         <br />
         <label htmlFor="instructions">Instructions: </label>
-        <input
+        <textarea
           type="text"
           name="instructions"
           value={recipes.instructions}
