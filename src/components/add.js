@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from 'axios'
 
 const Add = (props) => {
   const [recipes, setRecipes] = useState({
@@ -10,8 +9,6 @@ const Add = (props) => {
     equipment: "",
     ingredients: "",
   });
-
-  const [imageUrl, setImageUrl] = useState('')
 
   const navigate = useNavigate();
 
@@ -48,7 +45,7 @@ const Add = (props) => {
   return (
     <>
       <h1> Add Recipe</h1>
-      <form onSubmit={handleSubmit} encType='multipart/form-data'>
+      <form onSubmit={handleSubmit}>
         <label htmlFor="title">Title: </label>
         <input
           type="text"
@@ -64,7 +61,7 @@ const Add = (props) => {
           id="image"
           name="image"
           accept="image/*"
-          onChange={handleChange}
+          onChange={handleImageChange}
         />
         <img
           id="image-preview"
@@ -76,7 +73,7 @@ const Add = (props) => {
         <br />
         <label htmlFor="instructions">Instructions: </label>
         <input
-          type="text"
+          type="textarea"
           name="instructions"
           value={recipes.instructions}
           onChange={handleChange}
