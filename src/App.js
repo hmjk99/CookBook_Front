@@ -58,12 +58,12 @@ function App() {
     <Routes>
       <Route
         path="/"
-        element={<Recipes recipes={recipes} />}
+        element={<Recipes recipes={recipes} handleDelete={handleDelete} />}
       />
       <Route path="/add" element={<Add handleCreate={handleCreate} />} />
       <Route
         path="/:id"
-        element={<Show handleDelete={handleDelete} />}
+        element={<Show/>}
       />
     </Routes>
   );
