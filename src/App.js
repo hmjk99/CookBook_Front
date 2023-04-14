@@ -5,7 +5,8 @@ import axios from "axios";
 import Recipes from "./components/recipes";
 import Add from "./components/add";
 import Edit from "./components/edit";
-// import Edit from "./components/edit";
+import Show from "./components/show";
+
 
 function App() {
   const [recipes, setRecipes] = useState([]);
@@ -27,24 +28,36 @@ function App() {
   };
 
   const handleCreate = (addRecipe) => {
-    axios.post("http://localhost:8000/api/recipes", addRecipe).then((response) => {
+    axios.post("http://localhost:8000/api/recipes", addRecipe, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    }).then((response) => {
       console.log(response);
       getRecipes();
     });
   };
 
-  const handleUpdate = (editRecipe) => {
+  const handleUpdate = (id, editRecipe) => {
     console.log(editRecipe);
     axios
-      .put("http://localhost:8000/api/recipes/" + editRecipe.id, editRecipe)
+      .put("http://localhost:8000/api/recipes/" + id, editRecipe, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      })
       .then((response) => {
         getRecipes();
       });
   };
 
-  const handleDelete = (e) => {
+
+  
+
+
+  const handleDelete = (event) => {
     axios
-      .delete("http://localhost:8000/api/recipes/" + e.target.value)
+      .delete("http://localhost:8000/api/recipes/" + event.target.value)
       .then((response) => {
         getRecipes();
       });
@@ -59,13 +72,13 @@ function App() {
     <Routes>
       <Route
         path="/"
-        element={<Recipes recipes={recipes} handleDelete={handleDelete} handleUpdate={handleUpdate} />}
+        element={<Recipes recipes={recipes} />}
       />
       <Route path="/add" element={<Add handleCreate={handleCreate} />} />
-      {/* <Route
-        path="/edit/:id"
-        element={<Edit recipes={recipes} handleEdit={handleEdit} />}
-      /> */}
+      <Route
+        path="/:id"
+        element={<Show handleDelete={handleDelete} />}
+      />
     </Routes>
   );
 }
