@@ -1,10 +1,14 @@
-import React, { useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+
 
 const Edit = (props) => {
-  const navigate = useNavigate();
 
-  const [recipes, setRecipes] = useState({...props.recipe})
+  const [recipes, setRecipes] = useState({});
+
+  useEffect(() => {
+    setRecipes(props.recipe);
+  }, [props.recipe]);
+
 
   const handleChange = (event) => {
     setRecipes({ ...recipes, [event.target.name]: event.target.value })
