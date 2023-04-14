@@ -67,7 +67,7 @@ const Edit = (props) => {
           <br />
           <br />
           <label htmlFor="instructions">Instructions: </label>
-          <input
+          <textarea
             type="text"
             name="instructions"
             value={recipes.instructions}
