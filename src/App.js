@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import axios from "axios";
 import Recipes from "./components/recipes";
 import Add from "./components/add";
-import Edit from "./components/edit";
+import Show from "./components/show";
 
 function App() {
   const [recipes, setRecipes] = useState([]);
@@ -69,7 +69,10 @@ function App() {
         element={<Recipes recipes={recipes} handleDelete={handleDelete} />}
       />
       <Route path="/add" element={<Add handleCreate={handleCreate} />} />
-      <Route path="/:id" element={<Edit />} />
+      {/* <Route
+        path="/edit/:id"
+        element={<Edit recipes={recipes} handleEdit={handleEdit} />}
+      /> */}
     </Routes>
   );
 }
