@@ -70,7 +70,7 @@ const Add = (props) => {
         <br />
         <br />
         <label htmlFor="instructions">Instructions: </label>
-        <textarea
+        <input
           type="text"
           name="instructions"
           value={recipes.instructions}

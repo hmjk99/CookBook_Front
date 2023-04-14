@@ -10,7 +10,6 @@ function App() {
   const [recipes, setRecipes] = useState([]);
   const [users, setUsers] = useState([]);
 
-  // need the url from back end
   const getRecipes = () => {
     axios.get("http://localhost:8000/api/recipes").then(
       (response) => setRecipes(response.data),
@@ -38,15 +37,6 @@ function App() {
       });
   };
 
-  const handleUpdate = (editRecipe) => {
-    console.log(editRecipe);
-    axios
-      .put("http://localhost:8000/api/recipes/" + editRecipe.id, editRecipe)
-      .then((response) => {
-        getRecipes();
-      });
-  };
-
   const handleDelete = (deletedRecipes) => {
     axios
       .delete(
@@ -64,15 +54,9 @@ function App() {
 
   return (
     <Routes>
-      <Route
-        path="/"
-        element={<Recipes recipes={recipes} handleDelete={handleDelete} />}
-      />
+      <Route path="/" element={<Recipes recipes={recipes} />} />
       <Route path="/add" element={<Add handleCreate={handleCreate} />} />
-      {/* <Route
-        path="/edit/:id"
-        element={<Edit recipes={recipes} handleEdit={handleEdit} />}
-      /> */}
+      <Route path="/:id" element={<Show handleDelete={handleDelete} />} />
     </Routes>
   );
 }
