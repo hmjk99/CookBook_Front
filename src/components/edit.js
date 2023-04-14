@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+
 
 const Edit = (props) => {
   const [recipe, setRecipe] = useState({...props.recipe})
@@ -105,6 +105,6 @@ const Edit = (props) => {
     </details>
     </>
   )
-};
+  }
 
-export default Edit;
+export default Edit
