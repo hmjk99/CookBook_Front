@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import axios from "axios";
 import Recipes from "./components/recipes";
 import Add from "./components/add";
-// import Edit from "./components/edit";
+
 
 function App() {
   const [recipes, setRecipes] = useState([]);
@@ -39,10 +39,14 @@ function App() {
   }
 
 
-  const handleUpdate = (editRecipe) => {
+  const handleUpdate = (id, editRecipe) => {
     console.log(editRecipe);
     axios
-      .put("http://localhost:8000/api/recipes/" + editRecipe.id, editRecipe)
+      .put("http://localhost:8000/api/recipes/" + id, editRecipe, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
       .then((response) => {
         getRecipes();
       });
@@ -65,7 +69,7 @@ function App() {
     <Routes>
       <Route
         path="/"
-        element={<Recipes recipes={recipes} handleDelete={handleDelete} />}
+        element={<Recipes recipes={recipes} handleDelete={handleDelete} handleUpdate={handleUpdate}/>}
       />
       <Route path="/add" element={<Add handleCreate={handleCreate} />} />
       {/* <Route

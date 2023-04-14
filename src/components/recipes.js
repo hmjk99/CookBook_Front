@@ -1,5 +1,5 @@
 import {Link} from 'react-router-dom'
-
+import Edit from "./edit";
 
 const Recipes = (props) => {
   return (
@@ -16,6 +16,7 @@ const Recipes = (props) => {
               <h4>Ingredients: {recipe.ingredients}</h4>      
               <h4>Instructions: {recipe.instructions}</h4>     
               <button onClick={props.handleDelete} value={recipe.id}>X</button>
+              <Edit handleUpdate={props.handleUpdate} recipe={recipe}/>
             </div>
           )
         })}
