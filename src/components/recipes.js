@@ -17,7 +17,7 @@ const Recipes = (props) => {
               <h4>Ingredients: {recipe.ingredients}</h4>      
               <h4>Instructions: {recipe.instructions}</h4>
               <Edit handleUpdate={props.handleUpdate} recipe={recipe}/>
-              <button onClick={props.handleDelete} value={recipe.id}>X</button>
+              <button onClick={props.handleDelete} recipe={recipe}>X</button>
             </div>
           )
         })}

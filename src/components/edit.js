@@ -7,7 +7,7 @@ const Edit = (props) => {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  console.log(props);
+  // console.log(props);
 
 
   const handleChange = (event) => {
@@ -27,12 +27,18 @@ const Edit = (props) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     const formData = new FormData()
+    if (recipe.image instanceof File) {
+      formData.append('image', recipe.image)
+    } else {
+      formData.append('imageURL', recipe.image)
+    }
     formData.append('title', recipe.title)
     formData.append('image', recipe.image)
     formData.append('instructions', recipe.instructions)
     formData.append('equipment', recipe.equipment)
     formData.append('ingredients', recipe.ingredients)
-    props.handleUpdate(formData);
+
+    props.handleUpdate(recipe.id, formData);
     console.log(recipe);
     navigate("/");
   };
@@ -94,7 +100,7 @@ const Edit = (props) => {
         />
         <br />
         <br />
-        <input type="submit" />
+        <input type="submit" value="Save" />
       </form>
     </details>
     </>

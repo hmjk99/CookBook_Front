@@ -27,16 +27,24 @@ function App() {
   };
 
   const handleCreate = (addRecipe) => {
-    axios.post("http://localhost:8000/api/recipes", addRecipe).then((response) => {
+    axios.post("http://localhost:8000/api/recipes", addRecipe, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    }).then((response) => {
       console.log(response);
       getRecipes();
     });
   };
 
-  const handleUpdate = (editRecipe) => {
+  const handleUpdate = (id, editRecipe) => {
     console.log(editRecipe);
     axios
-      .put("http://localhost:8000/api/recipes/" + editRecipe.id, editRecipe)
+      .put("http://localhost:8000/api/recipes/" + id, editRecipe, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      })
       .then((response) => {
         getRecipes();
       });
