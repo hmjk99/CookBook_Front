@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 
 const Edit = (props) => {
   const [recipe, setRecipe] = useState({...props.recipe})
 
-  const { id } = useParams();
+  // const { id } = useParams();
   const navigate = useNavigate();
 
   // console.log(props);

@@ -55,9 +55,9 @@ function App() {
   
 
 
-  const handleDelete = (deletedRecipes) => {
+  const handleDelete = (event) => {
     axios
-      .delete("http://localhost:8000/api/recipes/" + e.target.value)
+      .delete("http://localhost:8000/api/recipes/" + event.target.value)
       .then((response) => {
         getRecipes();
       });
