@@ -5,7 +5,7 @@ const Nav = (props) =>{
         return(
             <div id="nav">
                 <Link to='/'>Home</Link>
-                <h4>Favorites</h4>
+                <Link to='/favorites'>Favorites</Link>
                 <Link to='/profile'>Profile</Link>
                 <p onClick={e => props.submitLogout(e)}>Logout</p>
             </div>

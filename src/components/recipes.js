@@ -31,25 +31,27 @@ const Recipes = (props) => {
         </div>
         {props.recipes
           .filter((recipe) => {
-            if (searchTerm == "") {
-              return recipe;
+            if (searchTerm === "") {
+              return true;
             } else if (
               recipe.title
                 .toLowerCase()
                 .includes(searchTerm.toLocaleLowerCase())
             ) {
               return (
-                <Link to={`/${recipe.id}`}>
-                  <h4>{recipe.title}</h4>
-                  <img src={recipe.image} />
-                </Link>
-              );
+                true
+              )
+            } else {
+              return (
+                false
+              )
             }
           })
           .map((recipe) => {
             return (
               <div>
                 <Link to={`/${recipe.id}`}>
+                  <h3>By: {props.user.name}</h3>
                   <h4>{recipe.title}</h4>
                   <img src={recipe.image} />
                 </Link>

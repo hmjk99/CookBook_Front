@@ -124,14 +124,14 @@ const App = () => {
 
       {currentUser ?
       <>
-       <Route path="/" element={<Recipes recipes={recipes} handleDelete={handleDelete} />}
+       <Route path="/" element={<Recipes recipes={recipes} handleDelete={handleDelete} user={user} favorites={favorites} setFavorites={setFavorites} />}
       />
       <Route path="/add" element={<Add handleCreate={handleCreate} user={user}/>} />
       <Route path="/:id" element={<Show/>}/>
       <Route path="/profile" element={<Profile user={user}/>}/>
       <Route
         path="/favorites"
-        element={<Favorites recipes={recipes} favorites={favorites} />}
+        element={<Favorites recipes={recipes} favorites={favorites} setFavorites={setFavorites} />}
       />
       </>
       :
