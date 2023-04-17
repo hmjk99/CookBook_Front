@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from 'axios'
 
 const Add = (props) => {
   const [recipes, setRecipes] = useState({
@@ -12,6 +11,7 @@ const Add = (props) => {
   });
 
   const navigate = useNavigate();
+
 
   const handleChange = (event) => {
     setRecipes({ ...recipes, [event.target.name]: event.target.value });
@@ -32,6 +32,7 @@ const Add = (props) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     const formData = new FormData();
+    formData.append("user_profile", props.user.id);
     formData.append("title", recipes.title);
     formData.append("image", recipes.image);
     formData.append("instructions", recipes.instructions);

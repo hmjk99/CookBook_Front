@@ -1,17 +1,28 @@
 import "./App.css";
 import React, { useState, useEffect } from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Recipes from "./components/recipes";
 import Add from "./components/add";
 import Show from "./components/show";
+import Register from './components/register'
+import Login from './components/login'
+import Nav from './components/nav'
+import Profile from './components/profile'
+
+axios.defaults.xsrfCookieName = 'csrftoken';
+axios.defaults.xsrfHeaderName = 'X-CSRFToken';
+axios.defaults.withCredentials = true;
 
 
-function App() {
+const App = () => {
   const [recipes, setRecipes] = useState([]);
-  const [users, setUsers] = useState([]);
+  const [user, setUser] = useState([]);
+  const [currentUser, setCurrentUser] = useState();
+  const [invalidMessage, setInvalid] = useState(false);
 
-  // need the url from back end
+  const navigate = useNavigate();
+
   const getRecipes = () => {
     axios.get("http://localhost:8000/api/recipes").then(
       (response) => setRecipes(response.data),
@@ -20,10 +31,15 @@ function App() {
   };
 
   const getUsers = () => {
-    axios.get("http://localhost:8000/api/userprofiles").then(
-      (response) => setUsers(response.data),
-      (err) => console.log(err)
-    );
+    axios.get("http://localhost:8000/api/user")
+      .then((response) => {
+        setCurrentUser(true);
+        setUser(response.data[0]);
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   const handleCreate = (addRecipes) => {
@@ -38,8 +54,6 @@ function App() {
       getRecipes();
     });
   }
-  
-
 
   const handleDelete = (deletedRecipes) => {
     axios
@@ -49,23 +63,73 @@ function App() {
       });
   };
 
+  const submitLogin = (data) => {
+    console.log('submit');
+    axios.post(
+      "http://localhost:8000/api/login", data
+    ).then((response)=> {
+      setCurrentUser(true);
+      navigate('/')
+    })
+    .catch((error) => {
+      console.log(error);
+      setInvalid(true);
+    });
+  }
+
+  const submitRegistration = (data) => {
+    axios.post(
+      "http://localhost:8000/api/register", data, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    ).then((res)=>{
+      navigate('/login')
+    })
+    .catch((error) => {
+      console.log(error);
+      setInvalid(true);
+    });
+  }
+
+  const submitLogout = (e) => {
+    e.preventDefault();
+    axios.post(
+      "http://localhost:8000/api/logout",
+      {withCredentials: true}
+    ).then(function(res) {
+      setCurrentUser(false);
+    });
+  }
+
+
   useEffect(() => {
     getRecipes()
     getUsers()
   }, []);
 
   return (
+    <>
+    <Nav currentUser={currentUser} submitLogout={submitLogout}/>
     <Routes>
-      <Route
-        path="/"
-        element={<Recipes recipes={recipes} handleDelete={handleDelete} />}
+      {currentUser ?
+      <>
+       <Route path="/" element={<Recipes recipes={recipes} handleDelete={handleDelete} />}
       />
-      <Route path="/add" element={<Add handleCreate={handleCreate} />} />
-      <Route
-        path="/:id"
-        element={<Show/>}
-      />
+      <Route path="/add" element={<Add handleCreate={handleCreate} user={user}/>} />
+      <Route path="/:id" element={<Show/>}/>
+      <Route path="/profile" element={<Profile user={user}/>}/>
+      </>
+      :
+      <>
+      <Route path="/register" element={<Register submitRegistration={submitRegistration} invalidMessage={invalidMessage}/>}/>
+      <Route path="/login" element={<Login submitLogin={submitLogin} invalidMessage={invalidMessage}/>}  />
+      </>
+      }
     </Routes>
+    </>
+  
   );
 }
 
