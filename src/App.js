@@ -10,12 +10,14 @@ import Login from './components/login'
 import Nav from './components/nav'
 import Profile from './components/profile'
 
+
 axios.defaults.xsrfCookieName = 'csrftoken';
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 axios.defaults.withCredentials = true;
 
 
 const App = () => {
+
   const [recipes, setRecipes] = useState([]);
   const [user, setUser] = useState([]);
   const [currentUser, setCurrentUser] = useState();
@@ -44,6 +46,7 @@ const App = () => {
 
   const handleCreate = (addRecipes) => {
     axios
+
     .post("http://localhost:8000/api/recipes", addRecipes, {
       headers: {
         "Content-Type": "multipart/form-data",
@@ -55,9 +58,12 @@ const App = () => {
     });
   }
 
+
   const handleDelete = (deletedRecipes) => {
     axios
-      .delete("http://localhost:8000/api/recipes/" + deletedRecipes.target.value)
+      .delete(
+        "http://localhost:8000/api/recipes/" + deletedRecipes.target.value
+      )
       .then((response) => {
         getRecipes();
       });
@@ -105,14 +111,15 @@ const App = () => {
 
 
   useEffect(() => {
-    getRecipes()
-    getUsers()
+    getRecipes();
+    getUsers();
   }, []);
 
   return (
     <>
     <Nav currentUser={currentUser} submitLogout={submitLogout}/>
     <Routes>
+
       {currentUser ?
       <>
        <Route path="/" element={<Recipes recipes={recipes} handleDelete={handleDelete} />}
@@ -127,6 +134,7 @@ const App = () => {
       <Route path="/login" element={<Login submitLogin={submitLogin} invalidMessage={invalidMessage}/>}  />
       </>
       }
+
     </Routes>
     </>
   
