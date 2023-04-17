@@ -1,25 +1,22 @@
 import { useState, useEffect } from "react";
 
-
 const Edit = (props) => {
-
   const [recipes, setRecipes] = useState({});
 
   useEffect(() => {
     setRecipes(props.recipe);
   }, [props.recipe]);
 
-
   const handleChange = (event) => {
-    setRecipes({ ...recipes, [event.target.name]: event.target.value })
-  }
+    setRecipes({ ...recipes, [event.target.name]: event.target.value });
+  };
 
   const handleImageChange = (event) => {
     const image = event.target.files[0];
     setRecipes({ ...recipes, image });
     const reader = new FileReader();
     reader.onload = () => {
-      document.getElementById('image-preview').src = reader.result;
+      document.getElementById("image-preview").src = reader.result;
     };
     reader.readAsDataURL(image);
   };
@@ -41,7 +38,7 @@ const Edit = (props) => {
 
   return (
     <>
-     <details>
+      <details>
         <summary>Edit Recipes</summary>
         <form onSubmit={handleSubmit}>
           <label htmlFor="title">Title: </label>
@@ -70,7 +67,7 @@ const Edit = (props) => {
           <br />
           <br />
           <label htmlFor="instructions">Instructions: </label>
-          <input
+          <textarea
             type="text"
             name="instructions"
             value={recipes.instructions}
