@@ -99,6 +99,7 @@ const App = () => {
       "http://localhost:8000/api/logout",
       {withCredentials: true}
     ).then(function(res) {
+      navigate('/login')
       setCurrentUser(false);
     });
   }
