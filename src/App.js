@@ -9,7 +9,6 @@ import Register from './components/register'
 import Login from './components/login'
 import Nav from './components/nav'
 import Profile from './components/profile'
-import Favorites from "./components/Favorites"
 
 
 axios.defaults.xsrfCookieName = 'csrftoken';
@@ -23,7 +22,6 @@ const App = () => {
   const [user, setUser] = useState([]);
   const [currentUser, setCurrentUser] = useState();
   const [invalidMessage, setInvalid] = useState(false);
-  const [favorites, setFavorites] = useState([])
 
   const navigate = useNavigate();
 
@@ -129,10 +127,6 @@ const App = () => {
       <Route path="/add" element={<Add handleCreate={handleCreate} user={user}/>} />
       <Route path="/:id" element={<Show/>}/>
       <Route path="/profile" element={<Profile user={user}/>}/>
-      <Route
-        path="/favorites"
-        element={<Favorites recipes={recipes} favorites={favorites} />}
-      />
       </>
       :
       <>
