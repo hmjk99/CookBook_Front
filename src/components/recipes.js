@@ -4,6 +4,14 @@ import { useState } from "react";
 const Recipes = (props) => {
   const [searchTerm, setSearchTerm] = useState("");
 
+  const handleFavorite = (recipeId) => {
+    if (!favorites.includes(recipeId)) {
+      setFavorites([...favorites, recipeId])
+    } else {
+      setFavorites(favorites.filter(id => id !== recipeId))
+    }
+  }
+
   return (
     <>
       <div>
