@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import Favorites from "./Favorites";
 
 const Recipes = (props) => {
   const [searchTerm, setSearchTerm] = useState("");
+  const [favorites, setFavorites] = useState([])
 
   const handleFavorite = (recipeId) => {
     if (!favorites.includes(recipeId)) {
