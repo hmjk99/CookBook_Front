@@ -55,6 +55,9 @@ const Recipes = (props) => {
                 <button onClick={props.handleDelete} value={recipe.id}>
                   X
                 </button>
+                <button onClick={ () => handleFavorite(recipe.id)}>
+                {favorites.includes(recipe.id) ? 'Unfavorite' : 'Favorite'}
+              </button>
               </div>
             );
           })}
