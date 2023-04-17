@@ -5,19 +5,16 @@ import axios from "axios";
 import Recipes from "./components/recipes";
 import Add from "./components/add";
 import Show from "./components/show";
-import Register from './components/register'
-import Login from './components/login'
-import Nav from './components/nav'
-import Profile from './components/profile'
+import Register from "./components/register";
+import Login from "./components/login";
+import Nav from "./components/nav";
+import Profile from "./components/profile";
 
-
-axios.defaults.xsrfCookieName = 'csrftoken';
-axios.defaults.xsrfHeaderName = 'X-CSRFToken';
+axios.defaults.xsrfCookieName = "csrftoken";
+axios.defaults.xsrfHeaderName = "X-CSRFToken";
 axios.defaults.withCredentials = true;
 
-
 const App = () => {
-
   const [recipes, setRecipes] = useState([]);
   const [user, setUser] = useState([]);
   const [currentUser, setCurrentUser] = useState();
@@ -33,7 +30,8 @@ const App = () => {
   };
 
   const getUsers = () => {
-    axios.get("http://localhost:8000/api/user")
+    axios
+      .get("http://localhost:8000/api/user")
       .then((response) => {
         setCurrentUser(true);
         setUser(response.data[0]);
@@ -47,17 +45,16 @@ const App = () => {
   const handleCreate = (addRecipes) => {
     axios
 
-    .post("http://localhost:8000/api/recipes", addRecipes, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    })
-    .then((response) => {
-      console.log(response);
-      getRecipes();
-    });
-  }
-
+      .post("http://localhost:8000/api/recipes", addRecipes, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
+      .then((response) => {
+        console.log(response);
+        getRecipes();
+      });
+  };
 
   const handleDelete = (deletedRecipes) => {
     axios
@@ -70,45 +67,45 @@ const App = () => {
   };
 
   const submitLogin = (data) => {
-    console.log('submit');
-    axios.post(
-      "http://localhost:8000/api/login", data
-    ).then((response)=> {
-      setCurrentUser(true);
-      navigate('/')
-    })
-    .catch((error) => {
-      console.log(error);
-      setInvalid(true);
-    });
-  }
+    console.log("submit");
+    axios
+      .post("http://localhost:8000/api/login", data)
+      .then((response) => {
+        setCurrentUser(true);
+        navigate("/");
+        getRecipes();
+        getUsers();
+      })
+      .catch((error) => {
+        console.log(error);
+        setInvalid(true);
+      });
+  };
 
   const submitRegistration = (data) => {
-    axios.post(
-      "http://localhost:8000/api/register", data, {
+    axios
+      .post("http://localhost:8000/api/register", data, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
-      }
-    ).then((res)=>{
-      navigate('/login')
-    })
-    .catch((error) => {
-      console.log(error);
-      setInvalid(true);
-    });
-  }
+      })
+      .then((res) => {
+        navigate("/login");
+      })
+      .catch((error) => {
+        console.log(error);
+        setInvalid(true);
+      });
+  };
 
   const submitLogout = (e) => {
     e.preventDefault();
-    axios.post(
-      "http://localhost:8000/api/logout",
-      {withCredentials: true}
-    ).then(function(res) {
-      setCurrentUser(false);
-    });
-  }
-
+    axios
+      .post("http://localhost:8000/api/logout", { withCredentials: true })
+      .then(function (res) {
+        setCurrentUser(false);
+      });
+  };
 
   useEffect(() => {
     getRecipes();
@@ -117,28 +114,48 @@ const App = () => {
 
   return (
     <>
-    <Nav currentUser={currentUser} submitLogout={submitLogout}/>
-    <Routes>
-
-      {currentUser ?
-      <>
-       <Route path="/" element={<Recipes recipes={recipes} handleDelete={handleDelete} />}
-      />
-      <Route path="/add" element={<Add handleCreate={handleCreate} user={user}/>} />
-      <Route path="/:id" element={<Show/>}/>
-      <Route path="/profile" element={<Profile user={user}/>}/>
-      </>
-      :
-      <>
-      <Route path="/register" element={<Register submitRegistration={submitRegistration} invalidMessage={invalidMessage}/>}/>
-      <Route path="/login" element={<Login submitLogin={submitLogin} invalidMessage={invalidMessage}/>}  />
-      </>
-      }
-
-    </Routes>
+      <Nav currentUser={currentUser} submitLogout={submitLogout} />
+      <Routes>
+        {currentUser ? (
+          <>
+            <Route
+              path="/"
+              element={
+                <Recipes recipes={recipes} handleDelete={handleDelete} />
+              }
+            />
+            <Route
+              path="/add"
+              element={<Add handleCreate={handleCreate} user={user} />}
+            />
+            <Route path="/:id" element={<Show />} />
+            <Route path="/profile" element={<Profile user={user} />} />
+          </>
+        ) : (
+          <>
+            <Route
+              path="/register"
+              element={
+                <Register
+                  submitRegistration={submitRegistration}
+                  invalidMessage={invalidMessage}
+                />
+              }
+            />
+            <Route
+              path="/login"
+              element={
+                <Login
+                  submitLogin={submitLogin}
+                  invalidMessage={invalidMessage}
+                />
+              }
+            />
+          </>
+        )}
+      </Routes>
     </>
-  
   );
-}
+};
 
 export default App;
