@@ -11,14 +11,11 @@ import Nav from './components/nav'
 import Profile from './components/profile'
 import Starter from './components/starter'
 
-
-axios.defaults.xsrfCookieName = 'csrftoken';
-axios.defaults.xsrfHeaderName = 'X-CSRFToken';
+axios.defaults.xsrfCookieName = "csrftoken";
+axios.defaults.xsrfHeaderName = "X-CSRFToken";
 axios.defaults.withCredentials = true;
 
-
 const App = () => {
-
   const [recipes, setRecipes] = useState([]);
   const [user, setUser] = useState([]);
   const [currentUser, setCurrentUser] = useState();
@@ -32,6 +29,7 @@ const App = () => {
       (err) => console.log(err)
     );
   };
+
 
   const getUser = () => {
     axios.get("http://localhost:8000/api/user")
@@ -48,17 +46,16 @@ const App = () => {
   const handleCreate = (addRecipes) => {
     axios
 
-    .post("http://localhost:8000/api/recipes", addRecipes, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    })
-    .then((response) => {
-      console.log(response);
-      getRecipes();
-    });
-  }
-
+      .post("http://localhost:8000/api/recipes", addRecipes, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
+      .then((response) => {
+        console.log(response);
+        getRecipes();
+      });
+  };
 
   const handleDelete = (deletedRecipes) => {
     axios
@@ -87,20 +84,20 @@ const App = () => {
   }
 
   const submitRegistration = (data) => {
-    axios.post(
-      "http://localhost:8000/api/register", data, {
+    axios
+      .post("http://localhost:8000/api/register", data, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
-      }
-    ).then((res)=>{
-      navigate('/login')
-    })
-    .catch((error) => {
-      console.log(error);
-      setInvalid(true);
-    });
-  }
+      })
+      .then((res) => {
+        navigate("/login");
+      })
+      .catch((error) => {
+        console.log(error);
+        setInvalid(true);
+      });
+  };
 
   const submitLogout = (e) => {
     e.preventDefault();
@@ -142,8 +139,7 @@ const App = () => {
 
     </Routes>
     </>
-  
   );
-}
+};
 
 export default App;
