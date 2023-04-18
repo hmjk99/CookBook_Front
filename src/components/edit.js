@@ -34,15 +34,16 @@ const Edit = (props) => {
     formData.append("equipment", recipes.equipment);
     formData.append("ingredients", recipes.ingredients);
     props.handleUpdate(recipes.id, formData);
+    props.showEdit()
   };
 
   return (
     <>
-      <details>
-        <summary>Edit Recipes</summary>
-        <form onSubmit={handleSubmit}>
+        <form id='edit-form' onSubmit={handleSubmit}>
           <label htmlFor="title">Title: </label>
+          <br />
           <input
+            className="edit-title"
             type="text"
             name="title"
             value={recipes.title}
@@ -50,7 +51,8 @@ const Edit = (props) => {
           />
           <br />
           <br />
-          <label htmlFor="image">image: </label>
+          <label htmlFor="image">Image: </label>
+          <br />
           <input
             type="file"
             id="image"
@@ -67,6 +69,7 @@ const Edit = (props) => {
           <br />
           <br />
           <label htmlFor="instructions">Instructions: </label>
+          <br />
           <textarea
             type="text"
             name="instructions"
@@ -76,7 +79,8 @@ const Edit = (props) => {
           <br />
           <br />
           <label htmlFor="equipment">Equipment: </label>
-          <input
+          <br />
+          <textarea
             type="text"
             name="equipment"
             value={recipes.equipment}
@@ -85,7 +89,8 @@ const Edit = (props) => {
           <br />
           <br />
           <label htmlFor="ingredients">Ingredients: </label>
-          <input
+          <br />
+          <textarea
             type="text"
             name="ingredients"
             value={recipes.ingredients}
@@ -93,9 +98,8 @@ const Edit = (props) => {
           />
           <br />
           <br />
-          <input type="submit" />
+          <input className='edit-submit' type="submit" value='submit'/>
         </form>
-      </details>
     </>
   );
 };

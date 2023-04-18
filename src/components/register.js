@@ -32,6 +32,10 @@ const Register = (props) =>{
 
     return(
         <div className='auth-whole'>
+          <div className='title'>
+            <h1>New to CookBook?</h1>
+            <h4>Sign up to plan, share, and enjoy home-cooked meals.</h4>
+          </div>
           <div className='auth-content'>
             {props.invalidMessage ?
                 <p className='error'>Username already exists</p>
@@ -61,7 +65,6 @@ const Register = (props) =>{
                   id="image-preview"
                   src={info.image}
                   alt="Image preview"
-                  style={{ maxWidth: "100%" }}
                 />
                 <br />
                 <br />

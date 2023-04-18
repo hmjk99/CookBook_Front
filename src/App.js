@@ -9,6 +9,7 @@ import Register from './components/register'
 import Login from './components/login'
 import Nav from './components/nav'
 import Profile from './components/profile'
+import Starter from './components/starter'
 
 
 axios.defaults.xsrfCookieName = 'csrftoken';
@@ -32,7 +33,7 @@ const App = () => {
     );
   };
 
-  const getUsers = () => {
+  const getUser = () => {
     axios.get("http://localhost:8000/api/user")
       .then((response) => {
         setCurrentUser(true);
@@ -76,6 +77,8 @@ const App = () => {
     ).then((response)=> {
       setCurrentUser(true);
       navigate('/')
+      getRecipes()
+      getUser()
     })
     .catch((error) => {
       console.log(error);
@@ -113,7 +116,7 @@ const App = () => {
 
   useEffect(() => {
     getRecipes();
-    getUsers();
+    getUser();
   }, []);
 
   return (
@@ -123,14 +126,15 @@ const App = () => {
 
       {currentUser ?
       <>
-       <Route path="/" element={<Recipes recipes={recipes} handleDelete={handleDelete} />}
+      <Route path="/" element={<Recipes recipes={recipes} handleDelete={handleDelete} />}
       />
       <Route path="/add" element={<Add handleCreate={handleCreate} user={user}/>} />
       <Route path="/:id" element={<Show/>}/>
-      <Route path="/profile" element={<Profile user={user}/>}/>
+      <Route path="/profile" element={<Profile user={user} getUser={getUser}/>}/>
       </>
       :
       <>
+      <Route path="/" element={<Starter/>} />
       <Route path="/register" element={<Register submitRegistration={submitRegistration} invalidMessage={invalidMessage}/>}/>
       <Route path="/login" element={<Login submitLogin={submitLogin} invalidMessage={invalidMessage}/>}  />
       </>

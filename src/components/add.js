@@ -43,11 +43,13 @@ const Add = (props) => {
   };
 
   return (
-    <>
-      <h1> Add Recipe</h1>
-      <form onSubmit={handleSubmit}>
+    <div id='add'>
+      <h3> Add Recipe</h3>
+      <form id='add-form' onSubmit={handleSubmit}>
         <label htmlFor="title">Title: </label>
+        <br />
         <input
+          className="add-title"
           type="text"
           name="title"
           value={recipes.title}
@@ -55,7 +57,7 @@ const Add = (props) => {
         />
         <br />
         <br />
-        <label htmlFor="image">image: </label>
+        <label htmlFor="image">Image: </label>
         <input
           type="file"
           id="image"
@@ -72,6 +74,7 @@ const Add = (props) => {
         <br />
         <br />
         <label htmlFor="instructions">Instructions: </label>
+        <br />
         <textarea
           type="text"
           name="instructions"
@@ -81,7 +84,8 @@ const Add = (props) => {
         <br />
         <br />
         <label htmlFor="equipment">Equipment: </label>
-        <input
+        <br />
+        <textarea
           type="text"
           name="equipment"
           value={recipes.equipment}
@@ -90,7 +94,8 @@ const Add = (props) => {
         <br />
         <br />
         <label htmlFor="ingredients">Ingredients: </label>
-        <input
+        <br />
+        <textarea
           type="text"
           name="ingredients"
           value={recipes.ingredients}
@@ -98,9 +103,9 @@ const Add = (props) => {
         />
         <br />
         <br />
-        <input type="submit" />
+        <input className='edit-submit' type="submit" />
       </form>
-    </>
+    </div>
   );
 };
 
