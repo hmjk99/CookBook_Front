@@ -1,38 +1,382 @@
-.App {
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Lobster&display=swap');
+
+:root {
+  /* --font-Primary:
+  --font-Secondary: */
+  --clr-dark:#2F4858;
+  --clr-medium:#4B8A82;
+  --clr-yellow: #f4edc3;
+  --clr-green: #cad8aa;
+  
+}
+
+body{
+  background-color: var(--clr-yellow);
+}
+
+/* ======================== Starter Page ======================= */
+#main-img{
+  width: 100%;
+  position: absolute;
+  top: 15rem;
+  left:0;
+  z-index: -1;
+  filter: blur(3px) brightness(55%);
+}
+#starter-home{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
   text-align: center;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.starter-link{
+  margin: 1rem;
+  width: 12rem;
+  height: 4rem;
+  background-color: var(--clr-green);
+  border: 3px solid white;
+  border-radius: 25px;
+  color: var(--clr-dark);
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+#title h1{
+  font-family: 'Dancing Script', cursive;
+  font-size: 5rem;
+  margin: 0.5rem;
+  color:white
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/* ======================== Auth Page ======================= */
+.title h1{
+  font-family: 'Lobster', cursive;
+  font-size: 3rem;
+  margin: 0;
+  color: var(--clr-medium)
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.title h4{
+  font-family: 'Lobster', cursive;
+  font-size: 1.5rem;
+  margin-top: 0.5rem;
+  color: var(--clr-medium)
+}
+.auth-whole{
+  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  text-align: center;
+}
+.auth-content{
+  background-color: var(--clr-green);
+  padding: 3rem 10rem;
+  box-shadow: 15px 15px 8px #828282;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.auth-input{
+  width: 17rem;
+  height: 2.7rem;
+  border-radius: 5px;
+  border: none;
+}
+::placeholder{
+  padding-left: 4px
+}
+.auth-submit{
+  width: 6rem;
+  height: 2.5rem;
+  background-color: var(--clr-medium);
+  border: none;
+  border-radius: 5px;
+  box-shadow: 3px 3px 7px #787878;
+  color: white
+}
+.auth-submit:hover{
+  color: var(--clr-dark);
+  background-color: var(--clr-yellow);
+  font-weight: 600;
+}
+a{
+  text-decoration: none;
+  color: var(--clr-dark)
+}
+a:hover{
+  text-decoration: underline;
+  font-weight: 600;
+}
+input::file-selector-button{
+  width: 6rem;
+  height: 2rem;
+  background-color: var(--clr-yellow);
+  border: 2px solid white ;
+  border-radius: 5px;
+}
+#image-preview{
+  margin-top: 1rem;
+  width: 10rem;
+  height:10rem
+}
+#image{
+  display: flex;
+}
+
+/* ======================== Nav Bar ======================= */
+#header{
+  background-color: var(--clr-yellow);
+  position: fixed;
+  top:0;
+  width: 100%;
+  height: 12rem;
+  text-align: center;
+}
+#nav-img{
+  position: absolute;
+  top:0;
+  left:0;
+  height: 12rem;
+  width: 100%;
+  object-fit: cover;
+  z-index: -1;
+  filter: blur(5px) brightness(65%);
+  
+}
+#header h1{
+  margin-top: 4rem;
+  font-family: 'Dancing Script', cursive;
+  font-size: 5rem;
+  color: white
+}
+#nav{
+  background-color: var(--clr-yellow);
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  top: 12rem;
+  width: 100%;
+  background-color: rgb(218, 218, 188);
+}
+#nav h4{
+  margin: 0.5rem 2rem;
+  font-family: 'Lobster', cursive;
+  font-size: 1.2rem;
+}
+#nav h4:hover{
+  text-decoration: underline;
+  color: var(--clr-medium);
+}
+#logout{
+  color: var(--clr-dark);
+}
+
+/* ======================== Home ======================= */
+#home{
+  margin-top: 15rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+#home h3{
+  font-family: 'Dancing Script', cursive;
+  font-size: 3rem;
+  margin: 1rem 
+}
+#home-recipes{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.recipe-top{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+#delete-button{
+  background-color: var(--clr-medium);
+  color:white;
+  height: 1.3rem;
+  border-radius: 3px;
+  border:none
+}
+#search{
+  width: 35rem;
+  height: 3rem;
+  margin: 2rem;
+  border-radius: 10px;
+  border: 4px solid var(--clr-green);
+}
+#search::placeholder{
+  color: var(--clr-dark)
+}
+#add-button{
+  width: 8rem;
+  height: 3rem;
+  background-color: var(--clr-medium);
+  border: none;
+  border-radius: 5px;
+  box-shadow: 3px 3px 8px #8d8c8c;
   color: white;
+  font-weight: 600;
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.1rem;
+}
+.recipe{
+  background-color: rgb(247, 247, 237);
+  padding: 2rem;
+  margin: 2rem;
+  border-radius: 10px;
+  box-shadow: 3px 3px 8px #8d8c8c;
+}
+.rec-image{
+  width: 20rem;
+  height: 20rem;
+  object-fit: contain;
+  background-color: whitesmoke;
+  border-radius: 10px;
+}
+h5{
+  margin: 0
 }
 
-.App-link {
-  color: #61dafb;
+/* ======================== Show ======================= */
+#show{
+  margin-top: 15rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.show-image{
+  width: 30rem;
+  height:25rem;
+  object-fit: contain;
+}
+.recipes-info{
+  background-color: var(--clr-green);
+  padding: 2rem;
+  width: 40rem;
+  border-radius: 10px;
+  box-shadow: 3px 3px 8px #8d8c8c;
+  margin: 2rem
+}
+.recipes-info p{
+  text-align: center;
+}
+.show-top{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.show-top h2{
+  font-family: 'Dancing Script', cursive;
+  font-size: 3rem;
+  margin: 1rem
+}
+#edit{
+  margin-left: 35rem;
+  width: 7rem;
+  height: 2rem;
+  border-radius: 10px;
+  border: none;
+  background-color: var(--clr-medium);
+  color: white;
+  font-weight: 600;
+  box-shadow: 3px 3px 8px #8d8c8c;
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.1rem;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* ======================== Edit ======================= */
+#edit-form{
+  background-color: var(--clr-green);
+  padding: 3rem 7rem;
+  margin: 2rem;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 3px 3px 8px #8d8c8c;
+}
+.edit-title{
+  height: 2rem;
+  border:2px solid var(--clr-yellow);
+  border-radius: 5px;
+}
+#edit-form textarea{
+  width: 25rem;
+  height: 7rem;
+  resize: none;
+  border-radius: 5px;
+  border: 2px solid var(--clr-yellow);
+}
+.edit-submit{
+  width: 5rem;
+  height: 2rem;
+  border: none;
+  background-color: var(--clr-medium);
+  border-radius: 5px;
+  box-shadow: 3px 3px 8px #8d8c8c;
+  color: white
+}
+
+/* ======================== Add ======================= */
+#add{
+  margin-top: 15rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+#add-form{
+  background-color: var(--clr-green);
+  padding: 2rem 7rem;
+  box-shadow: 3px 3px 8px #8d8c8c;
+  
+}
+.add-title{
+  height: 2rem;
+  width: 25rem;
+  border:2px solid var(--clr-yellow);
+  border-radius: 5px;
+  margin-top: 0.5rem
+}
+#add-form textarea{
+  width: 25rem;
+  height: 7rem;
+  resize: none;
+  border-radius: 5px;
+  border: 2px solid var(--clr-yellow);
+  margin-top: 0.5rem;
+}
+
+/* ======================== Profile ======================= */
+#profile-page{
+  margin-top: 17rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#profile{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--clr-green);
+  width: 50rem;
+  padding: 2rem 0;
+  border-radius: 10px;
+  box-shadow: 3px 3px 8px #8d8c8c;
+}
+#profile-button{
+  width: 7rem;
+  height: 2.5rem;
+  border: none;
+  background-color: var(--clr-medium);
+  border-radius: 5px;
+  box-shadow: 3px 3px 8px #8d8c8c;
+  color: white
 }
