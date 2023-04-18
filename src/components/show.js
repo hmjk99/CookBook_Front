@@ -7,6 +7,12 @@ import Edit from "./edit";
 const Show = (props) => {
   const { id } = useParams();
   const [recipe, setRecipe] = useState("");
+  const [displayEdit, setEdit] = useState(false)
+
+
+  const showEdit = () =>{
+    setEdit(!displayEdit)
+  }
 
   const getRecipes = () => {
     axios.get(`http://localhost:8000/api/recipes/${id}`).then(
@@ -32,20 +38,33 @@ const Show = (props) => {
   }, []);
 
   return (
-    <>
-      <div>
-        <h1>Recipes</h1>
-        <div>
-          <h4>{recipe.title}</h4>
-          <img src={recipe.image} />
-          <h4>Equipment: {recipe.equipment}</h4>
-          <h4>Ingredients: {recipe.ingredients}</h4>
-          <h4>Instructions: {recipe.instructions}</h4>
-          <Edit handleUpdate={handleUpdate} recipe={recipe} />
-        </div>
-        <Link to="/">Back to Home</Link>
+    <div id='show'>
+      <div className='show-top'>
+        <h2>{recipe.title}</h2>
       </div>
-    </>
+      {displayEdit ?
+        <>
+          <Edit handleUpdate={handleUpdate} recipe={recipe} showEdit={showEdit}/>
+        </>
+        :
+        <>
+          <img className='show-image' src={recipe.image} />
+          <button id='edit' onClick={showEdit}>Edit</button>
+          <div className="recipes-info">
+            <h3>Equipment:</h3>
+            <p>{recipe.equipment}</p>
+          </div>
+          <div className="recipes-info">
+            <h3>Ingredients:</h3>
+            <p>{recipe.ingredients}</p>
+          </div>
+          <div className="recipes-info">
+            <h3>Instructions:</h3>
+            <p>{recipe.instructions}</p>
+          </div>
+        </>
+      }
+    </div>
   );
 };
 

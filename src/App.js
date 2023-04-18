@@ -5,10 +5,11 @@ import axios from "axios";
 import Recipes from "./components/recipes";
 import Add from "./components/add";
 import Show from "./components/show";
-import Register from "./components/register";
-import Login from "./components/login";
-import Nav from "./components/nav";
-import Profile from "./components/profile";
+import Register from './components/register'
+import Login from './components/login'
+import Nav from './components/nav'
+import Profile from './components/profile'
+import Starter from './components/starter'
 
 axios.defaults.xsrfCookieName = "csrftoken";
 axios.defaults.xsrfHeaderName = "X-CSRFToken";
@@ -29,9 +30,9 @@ const App = () => {
     );
   };
 
-  const getUsers = () => {
-    axios
-      .get("http://localhost:8000/api/user")
+
+  const getUser = () => {
+    axios.get("http://localhost:8000/api/user")
       .then((response) => {
         setCurrentUser(true);
         setUser(response.data[0]);
@@ -67,20 +68,20 @@ const App = () => {
   };
 
   const submitLogin = (data) => {
-    console.log("submit");
-    axios
-      .post("http://localhost:8000/api/login", data)
-      .then((response) => {
-        setCurrentUser(true);
-        navigate("/");
-        getRecipes();
-        getUsers();
-      })
-      .catch((error) => {
-        console.log(error);
-        setInvalid(true);
-      });
-  };
+    console.log('submit');
+    axios.post(
+      "http://localhost:8000/api/login", data
+    ).then((response)=> {
+      setCurrentUser(true);
+      navigate('/')
+      getRecipes()
+      getUser()
+    })
+    .catch((error) => {
+      console.log(error);
+      setInvalid(true);
+    });
+  }
 
   const submitRegistration = (data) => {
     axios
@@ -100,60 +101,43 @@ const App = () => {
 
   const submitLogout = (e) => {
     e.preventDefault();
-    axios
-      .post("http://localhost:8000/api/logout", { withCredentials: true })
-      .then(function (res) {
-        setCurrentUser(false);
-      });
-  };
+    axios.post(
+      "http://localhost:8000/api/logout",
+      {withCredentials: true}
+    ).then(function(res) {
+      navigate('/login')
+      setCurrentUser(false);
+    });
+  }
+
 
   useEffect(() => {
     getRecipes();
-    getUsers();
+    getUser();
   }, []);
 
   return (
     <>
-      <Nav currentUser={currentUser} submitLogout={submitLogout} />
-      <Routes>
-        {currentUser ? (
-          <>
-            <Route
-              path="/"
-              element={
-                <Recipes recipes={recipes} handleDelete={handleDelete} />
-              }
-            />
-            <Route
-              path="/add"
-              element={<Add handleCreate={handleCreate} user={user} />}
-            />
-            <Route path="/:id" element={<Show />} />
-            <Route path="/profile" element={<Profile user={user} />} />
-          </>
-        ) : (
-          <>
-            <Route
-              path="/register"
-              element={
-                <Register
-                  submitRegistration={submitRegistration}
-                  invalidMessage={invalidMessage}
-                />
-              }
-            />
-            <Route
-              path="/login"
-              element={
-                <Login
-                  submitLogin={submitLogin}
-                  invalidMessage={invalidMessage}
-                />
-              }
-            />
-          </>
-        )}
-      </Routes>
+    <Nav currentUser={currentUser} submitLogout={submitLogout}/>
+    <Routes>
+
+      {currentUser ?
+      <>
+      <Route path="/" element={<Recipes recipes={recipes} handleDelete={handleDelete} />}
+      />
+      <Route path="/add" element={<Add handleCreate={handleCreate} user={user}/>} />
+      <Route path="/:id" element={<Show/>}/>
+      <Route path="/profile" element={<Profile user={user} getUser={getUser}/>}/>
+      </>
+      :
+      <>
+      <Route path="/" element={<Starter/>} />
+      <Route path="/register" element={<Register submitRegistration={submitRegistration} invalidMessage={invalidMessage}/>}/>
+      <Route path="/login" element={<Login submitLogin={submitLogin} invalidMessage={invalidMessage}/>}  />
+      </>
+      }
+
+    </Routes>
     </>
   );
 };

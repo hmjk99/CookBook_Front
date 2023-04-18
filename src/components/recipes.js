@@ -5,14 +5,11 @@ const Recipes = (props) => {
   const [searchTerm, setSearchTerm] = useState("");
 
   return (
-    <>
-      <div>
-        <h1>Recipes</h1>
-        <Link to="/add">
-          <button>Add New Recipe</button>
-        </Link>
+      <div id='home'>
+        <h3>Recipes</h3>
         <div>
           <input
+            id="search"
             type="search"
             placeholder="search by recipe name..."
             onChange={(e) => {
@@ -20,6 +17,10 @@ const Recipes = (props) => {
             }}
           />
         </div>
+        <Link to="/add">
+          <button id='add-button'>Add New Recipe</button>
+        </Link>
+        <div id='home-recipes'>
         {props.recipes
           .filter((recipe) => {
             if (searchTerm == "") {
@@ -39,19 +40,21 @@ const Recipes = (props) => {
           })
           .map((recipe) => {
             return (
-              <div>
+              <div className="recipe">
+                  <div className="recipe-top">
+                    <h4>{recipe.title}</h4>
+                    <button id='delete-button' onClick={props.handleDelete} value={recipe.id}>
+                      X
+                    </button>
+                  </div>
                 <Link to={`/${recipe.id}`}>
-                  <h4>{recipe.title}</h4>
-                  <img src={recipe.image} />
+                  <img className='rec-image' src={recipe.image} />
                 </Link>
-                <button onClick={props.handleDelete} value={recipe.id}>
-                  X
-                </button>
               </div>
             );
           })}
+        </div>
       </div>
-    </>
   );
 };
 
