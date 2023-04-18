@@ -1,5 +1,4 @@
 import {Link} from 'react-router-dom'
-import React, { useEffect } from "react";
 
 const Starter = () =>{
 
