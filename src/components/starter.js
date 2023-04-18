@@ -1,6 +1,8 @@
 import {Link} from 'react-router-dom'
+import React, { useEffect } from "react";
 
 const Starter = () =>{
+
     return (
         <>
         <img id='main-img' src='https://cdn.vox-cdn.com/thumbor/7-7QKKFpvC3-HEuS-HZ3yOZLC0g=/0x0:6000x4000/1720x0/filters:focal(0x0:6000x4000):format(webp):no_upscale()/cdn.vox-cdn.com/uploads/chorus_asset/file/23957271/Anju.jpg'/>
